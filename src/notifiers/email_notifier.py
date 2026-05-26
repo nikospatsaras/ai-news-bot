@@ -280,7 +280,7 @@ class EmailNotifier:
                     </div>
 
                     <p class="brand-name">Νίκος Πατσαράς</p>
-                    <p class="tagline">AI Briefing — Καθημερινή ενημέρωση για επαγγελματίες της αισθητικής</p>
+                    <p class="tagline">AI Briefing — Καθημερινή ενημέρωση για τα AI εργαλεία</p>
 
                     <div class="quick-links">
                         <a href="https://nikospatsaras.gr">Website</a>
