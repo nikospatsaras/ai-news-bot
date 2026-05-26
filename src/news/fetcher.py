@@ -21,25 +21,25 @@ class NewsFetcher:
             # Major Tech Media
             "TechCrunch AI": "https://techcrunch.com/tag/artificial-intelligence/feed/",
             "VentureBeat AI": "https://venturebeat.com/category/ai/feed/",
-            "MIT Technology Review": "https://www.technologyreview.com/feed/",
+            "MIT Technology Review AI": "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
             "Ars Technica AI": "https://arstechnica.com/tag/ai/feed/",
             "Wired AI": "https://www.wired.com/feed/tag/ai/latest/rss",
             "The Next Web": "https://thenextweb.com/feed",
             "The Verge AI": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
 
-            # Official AI Company Blogs
+            # Official AI Company Blogs (OpenAI, Google/Gemini, Microsoft)
+            "OpenAI News": "https://openai.com/news/rss.xml",
             "Google AI Blog": "https://blog.google/technology/ai/rss/",
             "Microsoft AI Blog": "https://blogs.microsoft.com/ai/feed/",
+            "Hugging Face Blog": "https://huggingface.co/blog/feed.xml",
 
-            # Research & Academic
-            "arXiv AI": "https://rss.arxiv.org/rss/cs.AI",
-            "arXiv Machine Learning": "https://rss.arxiv.org/rss/cs.LG",
-            "arXiv Computer Vision": "https://rss.arxiv.org/rss/cs.CV",
-            "arXiv NLP": "https://rss.arxiv.org/rss/cs.CL",
+            # AI-Focused Publications & Newsletters
+            "MarkTechPost": "https://www.marktechpost.com/feed/",
+            "Last Week in AI": "https://lastweekin.ai/feed",
+            "Ahead of AI": "https://magazine.sebastianraschka.com/feed",
 
-            # Industry Verticals
-            "Robotics Business Review": "https://www.roboticsbusinessreview.com/feed/",
-            "Autonomous Vehicle News": "https://www.autonomousvehicleinternational.com/feed",
+            # Research
+            "arXiv AI Research": "https://rss.arxiv.org/rss/cs.AI",
         }
 
         # Chinese AI news sources (zh)
