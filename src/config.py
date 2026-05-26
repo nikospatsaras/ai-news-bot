@@ -14,6 +14,7 @@ logger = setup_logger(__name__)
 
 # Supported language codes and their display names
 LANGUAGE_NAMES = {
+    "el": "Greek (Ελληνικά)",
     "zh": "Chinese (中文)",
     "es": "Spanish (Español)",
     "fr": "French (Français)",
