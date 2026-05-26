@@ -100,7 +100,7 @@ class EmailNotifier:
         icon_style = 'width="20" height="20" style="vertical-align: middle; border: 0; display: inline-block;"'
         facebook_icon = f'<img src="https://cdn.simpleicons.org/facebook/ffffff" alt="Facebook" {icon_style}>'
         instagram_icon = f'<img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram" {icon_style}>'
-        linkedin_icon = '<img src="https://api.iconify.design/fa6-brands:linkedin.svg?color=%23ffffff" alt="LinkedIn" width="22" height="22" style="vertical-align: middle; border: 0; display: inline-block;">'
+        linkedin_icon = '<img src="https://api.iconify.design/ic:baseline-linkedin.svg?color=%23ffffff" alt="LinkedIn" width="24" height="24" style="vertical-align: middle; border: 0; display: inline-block;">'
         viber_icon = f'<img src="https://cdn.simpleicons.org/viber/ffffff" alt="Viber" {icon_style}>'
 
         html = f"""
