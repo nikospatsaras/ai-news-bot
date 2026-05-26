@@ -247,7 +247,7 @@ class EmailNotifier:
                         <a href="https://invite.viber.com/?g2=AQAuZ8nuvPdi11XROm9N2PgkZkVBGi%2BV6LPRSYKJC%2BpR%2BhiReinEPvDP8zLI5oC%2B">Viber Community</a>
                     </div>
 
-                    <p class="copyright">© {current_year} Νίκος Πατσαράς · All rights reserved<br>nikospatsaras.gr</p>
+                    <p class="copyright">© {current_year} Νίκος Πατσάρας · All rights reserved<br>nikospatsaras.gr</p>
                 </div>
             </div>
         </body>
