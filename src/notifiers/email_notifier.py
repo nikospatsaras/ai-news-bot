@@ -52,19 +52,10 @@ class EmailNotifier:
     def send(self, content: str, subject: Optional[str] = None, language: str = "en") -> bool:
         """
         Send email notification with news digest.
-
-        Args:
-            content: Email body content (news digest)
-            subject: Email subject. If None, uses default with current date
-            language: Language code to include in subject (e.g., 'en', 'zh', 'ja')
-
-        Returns:
-            True if email sent successfully, False otherwise
         """
         # Create default subject if not provided
         if subject is None:
             today = datetime.now().strftime("%d/%m/%Y")
-            lang_suffix = f" [{language.upper()}]" if language != "en" else ""
             subject = f"Καθημερινό AI Briefing — {today}"
 
         if not all([self.gmail_address, self.gmail_app_password, self.email_to]):
@@ -89,11 +80,12 @@ class EmailNotifier:
 
             logger.info(f"Sending email via Gmail SMTP to {self.email_to}")
 
-            # Connect and send
+            # Connect and send (supports multiple recipients via comma-separated EMAIL_TO)
             with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
                 server.starttls()
                 server.login(self.gmail_address, self.gmail_app_password)
-                server.sendmail(self.gmail_address, self.email_to, msg.as_string())
+                recipients = [e.strip() for e in self.email_to.split(",")]
+                server.sendmail(self.gmail_address, recipients, msg.as_string())
 
             logger.info("Email sent successfully via Gmail SMTP")
             return True
@@ -112,31 +104,22 @@ class EmailNotifier:
     def _create_html_email(self, content: str, subject: str) -> str:
         """
         Create HTML version of email with proper formatting.
-
-        Args:
-            content: Markdown formatted content
-            subject: Email subject
-
-        Returns:
-            HTML formatted email
         """
         try:
             import markdown
             from markdown.extensions import nl2br, tables, fenced_code
 
-            # Convert markdown to HTML with extensions
             html_content = markdown.markdown(
                 content,
                 extensions=[
-                    'nl2br',      # Convert newlines to <br>
-                    'tables',     # Support for tables
-                    'fenced_code',# Support for code blocks
-                    'sane_lists', # Better list handling
+                    'nl2br',
+                    'tables',
+                    'fenced_code',
+                    'sane_lists',
                 ]
             )
         except ImportError:
             logger.warning("markdown library not installed, using basic HTML formatting")
-            # Fallback to basic HTML escaping and line break conversion
             import html
             html_content = html.escape(content).replace('\n', '<br>\n')
 
@@ -148,7 +131,7 @@ class EmailNotifier:
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
                 body {{
-                    font-family: Verdana, Tahoma, 'Segoe UI', Geneva, sans-serif;
+                    font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
                     line-height: 1.8;
                     color: #24292e;
                     max-width: 800px;
@@ -163,25 +146,25 @@ class EmailNotifier:
                     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                 }}
                 .title {{
-                    color: #0366d6;
+                    color: #476fff;
                     font-size: 32px;
                     font-weight: 700;
                     margin-bottom: 20px;
                     padding-bottom: 15px;
-                    border-bottom: 4px solid #0366d6;
+                    border-bottom: 4px solid #476fff;
                     text-align: center;
                 }}
                 .content {{
                     margin-top: 30px;
                 }}
                 .content h1 {{
-                    color: #0366d6;
+                    color: #476fff;
                     font-size: 28px;
                     font-weight: 700;
                     margin-top: 40px;
                     margin-bottom: 20px;
                     padding-bottom: 12px;
-                    border-bottom: 3px solid #0366d6;
+                    border-bottom: 3px solid #476fff;
                 }}
                 .content h2 {{
                     color: #2c3e50;
@@ -199,7 +182,7 @@ class EmailNotifier:
                     margin-top: 28px;
                     margin-bottom: 15px;
                     padding-left: 12px;
-                    border-left: 4px solid #0366d6;
+                    border-left: 4px solid #476fff;
                 }}
                 .content h4 {{
                     color: #586069;
@@ -223,7 +206,7 @@ class EmailNotifier:
                 }}
                 .content strong {{
                     font-weight: 700;
-                    color: #0366d6;
+                    color: #476fff;
                 }}
                 .content em {{
                     font-style: italic;
@@ -262,13 +245,13 @@ class EmailNotifier:
                     margin: 30px 0;
                 }}
                 .content a {{
-                    color: #0366d6;
+                    color: #476fff;
                     text-decoration: none;
                     border-bottom: 1px solid transparent;
                     transition: border-bottom 0.2s;
                 }}
                 .content a:hover {{
-                    border-bottom: 1px solid #0366d6;
+                    border-bottom: 1px solid #476fff;
                 }}
                 .content table {{
                     border-collapse: collapse;
@@ -305,7 +288,6 @@ class EmailNotifier:
                 </div>
             </div>
             <div class="footer">
-                <p>This email was automatically generated by AI News Bot</p>
                 <p>Καθημερινή ενημέρωση AI — Personal briefing</p>
             </div>
         </body>
