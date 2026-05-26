@@ -28,11 +28,12 @@ class NewsFetcher:
             "The Verge AI": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
 
             # Official AI Company Blogs (OpenAI, Google/Gemini, Microsoft)
-            "Anthropic/Claude News (via Google)": "https://news.google.com/rss/search?q=Anthropic+Claude+AI&hl=en-US&gl=US&ceid=US:en",
             "OpenAI News": "https://openai.com/news/rss.xml",
             "Google AI Blog": "https://blog.google/technology/ai/rss/",
             "Microsoft AI Blog": "https://blogs.microsoft.com/ai/feed/",
             "Hugging Face Blog": "https://huggingface.co/blog/feed.xml",
+            "Anthropic/Claude News (via Google)": "https://news.google.com/rss/search?q=Anthropic+Claude+AI&hl=en-US&gl=US&ceid=US:en",
+            "ChatGPT News": "https://news.google.com/rss/search?q=ChatGPT+OpenAI&hl=en-US&gl=US&ceid=US:en",
 
             # AI-Focused Publications & Newsletters
             "MarkTechPost": "https://www.marktechpost.com/feed/",
