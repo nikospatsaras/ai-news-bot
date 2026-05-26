@@ -100,7 +100,7 @@ class EmailNotifier:
         icon_style = 'width="20" height="20" style="vertical-align: middle; border: 0; display: inline-block;"'
         facebook_icon = f'<img src="https://cdn.simpleicons.org/facebook/ffffff" alt="Facebook" {icon_style}>'
         instagram_icon = f'<img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram" {icon_style}>'
-        linkedin_icon = f'<img src="https://cdn.simpleicons.org/linkedin/ffffff" alt="LinkedIn" {icon_style}>'
+        linkedin_icon = f'<img src="https://api.iconify.design/mdi:linkedin.svg?color=%23ffffff" alt="LinkedIn" {icon_style}>'
         viber_icon = f'<img src="https://cdn.simpleicons.org/viber/ffffff" alt="Viber" {icon_style}>'
 
         html = f"""
@@ -238,7 +238,7 @@ class EmailNotifier:
                         <a href="https://invite.viber.com/?g2=AQAuZ8nuvPdi11XROm9N2PgkZkVBGi%2BV6LPRSYKJC%2BpR%2BhiReinEPvDP8zLI5oC%2B" class="social-icon" title="Viber Community">{viber_icon}</a>
                     </div>
 
-                    <p class="brand-name">Νίκος Πατσαράς</p>
+                    <p class="brand-name">Νίκος Πατσάρας</p>
                     <p class="tagline">AI Briefing — Καθημερινή ενημέρωση για επαγγελματίες της αισθητικής</p>
 
                     <div class="quick-links">
