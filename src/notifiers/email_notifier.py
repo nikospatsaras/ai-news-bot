@@ -234,7 +234,7 @@ class EmailNotifier:
                     <div class="social-icons">
                         <a href="https://www.facebook.com/nikoslaospatsaras/" class="social-icon" title="Facebook">{facebook_icon}</a>
                         <a href="https://www.instagram.com/nikospatsaras/" class="social-icon" title="Instagram">{instagram_icon}</a>
-                        <a href="https://www.linkedin.com/in/nikolaos-patsaras/" class="social-icon" title="LinkedIn">{linkedin_icon}</a>
+                        <a href="https://www.linkedin.com/in/nikolaos-patsaras/" style="display: inline-block; width: 42px; height: 42px; line-height: 42px; text-align: center; border-radius: 50%; background-color: #ffffff; border: 2px solid #476fff; text-decoration: none; margin: 0 5px; box-sizing: border-box;" title="LinkedIn"><img src="https://api.iconify.design/mdi:linkedin.svg?color=%230077B5" alt="LinkedIn" width="22" height="22" style="vertical-align: middle; border: 0; display: inline-block;"></a>
                         <a href="https://invite.viber.com/?g2=AQAuZ8nuvPdi11XROm9N2PgkZkVBGi%2BV6LPRSYKJC%2BpR%2BhiReinEPvDP8zLI5oC%2B" class="social-icon" title="Viber Community">{viber_icon}</a>
                     </div>
 
