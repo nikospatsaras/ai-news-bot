@@ -223,7 +223,7 @@ class EmailNotifier:
                 }}
                 .content strong {{
                     font-weight: 700;
-                    color: #000000;
+                    color: #0366d6;
                 }}
                 .content em {{
                     font-style: italic;
