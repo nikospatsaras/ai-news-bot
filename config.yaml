@@ -5,42 +5,47 @@ llm:
 news:
   use_real_sources: true
   enable_web_search: false
-  max_items_per_source: 5
+  max_items_per_source: 3
 
   topics:
-    - "Νέα μοντέλα AI και Large Language Models"
-    - "AI εργαλεία για content creation, εικόνα και video"
-    - "AI εφαρμογές στον χώρο της ομορφιάς και αισθητικής"
-    - "AI πλατφόρμες για εκπαίδευση και επαγγελματική κατάρτιση"
-    - "Νέα launches εργαλείων AI για επαγγελματίες"
-    - "Πρακτικές τάσεις και αλλαγές στον χώρο του AI"
+    - "AI tools for content creation and education"
+    - "New AI model releases and updates"
+    - "AI applications in beauty and aesthetics industry"
+    - "Practical AI tools for professionals"
 
   prompt_template: |
-    Είσαι ένας έμπειρος αναλυτής τεχνολογίας AI που ενημερώνει έναν επαγγελματία
-    στον χώρο της αισθητικής εκπαίδευσης.
+    ⚠️ CRITICAL LANGUAGE RULE - READ FIRST ⚠️
+    Your entire response MUST be in GREEK (Ελληνικά) language only.
+    Do NOT write in English. Translate ALL English content to Greek.
+    If you write in English, the response is WRONG.
 
-    Επίλεξε ΜΟΝΟ τα 6-8 πιο σημαντικά νέα του AI των τελευταίων 24-48 ωρών
-    στους τομείς: {topics}
+    ROLE: You are an AI news analyst writing in Greek for a beauty industry educator.
 
-    ΠΟΛΥ ΣΗΜΑΝΤΙΚΟ:
-    - Απάντησε ΑΠΟΚΛΕΙΣΤΙΚΑ στα Ελληνικά (μετάφρασε όλα τα Αγγλικά).
-    - ΜΕΓΙΣΤΟΣ αριθμός νέων: 8.
+    TASK: Select ONLY 5 most important AI news from the last 48 hours covering: {topics}
 
-    Ξεκίνα με σύντομη "Σύνοψη Ημέρας" (3-4 γραμμές) για τις βασικές τάσεις.
+    STRICT LIMITS:
+    - Maximum 5 news items. Not 6. Not 7. Exactly 5 or fewer.
+    - Each summary: maximum 2 short sentences in Greek.
+    - Total response under 800 words.
 
-    Μετά, για κάθε νέο γράψε:
+    FORMAT (write everything in Greek):
 
-    [Αριθμός]. [Τίτλος στα Ελληνικά]
-    [Περίληψη 2-3 προτάσεων στα Ελληνικά]
-    💡 Γιατί έχει σημασία: [1-2 προτάσεις για επαγγελματία στην εκπαίδευση/αισθητική]
-    Πηγή: [Όνομα πηγής]
+    📅 ΣΥΝΟΨΗ ΗΜΕΡΑΣ
+    [2 σύντομες προτάσεις στα Ελληνικά για τις σημαντικότερες τάσεις]
 
-    Κλείσε με "🔮 Τι να προσέξω" με 2-3 bullet points.
+    📰 ΤΑ ΝΕΑ
 
-    Κανόνες:
-    - Μόνο πρόσφατα νέα (τελευταίες 48 ώρες)
-    - Καθαρή γλώσσα, χωρίς markdown σύμβολα
-    - Προτεραιότητα σε πρακτικές εφαρμογές και νέα tools
+    1. [Τίτλος στα Ελληνικά]
+    [Μία περίληψη 2 προτάσεων στα Ελληνικά]
+    💡 Σημασία: [Μία πρόταση στα Ελληνικά - γιατί ενδιαφέρει επαγγελματία αισθητικής/εκπαίδευσης]
+
+    [Repeat for items 2-5]
+
+    🔮 ΤΙ ΝΑ ΠΡΟΣΕΞΩ
+    • [Σύντομο bullet στα Ελληνικά]
+    • [Σύντομο bullet στα Ελληνικά]
+
+    REMEMBER: EVERYTHING in Greek. Be concise. Maximum 5 items.
 
 logging:
   level: INFO
