@@ -222,8 +222,8 @@ class EmailNotifier:
                     line-height: 1.8;
                 }}
                 .content strong {{
-                    font-weight: 600;
-                    color: #0366d6;
+                    font-weight: 700;
+                    color: #000000;
                 }}
                 .content em {{
                     font-style: italic;
