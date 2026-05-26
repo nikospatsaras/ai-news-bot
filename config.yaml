@@ -8,44 +8,62 @@ news:
   max_items_per_source: 3
 
   topics:
-    - "AI tools for content creation and education"
-    - "New AI model releases and updates"
-    - "AI applications in beauty and aesthetics industry"
+    - "AI tools for content creation"
+    - "New AI model releases"
+    - "AI for beauty and aesthetics industry"
     - "Practical AI tools for professionals"
 
-  prompt_template: |
-    ⚠️ CRITICAL LANGUAGE RULE - READ FIRST ⚠️
-    Your entire response MUST be in GREEK (Ελληνικά) language only.
-    Do NOT write in English. Translate ALL English content to Greek.
-    If you write in English, the response is WRONG.
+  stage1_prompt_template: |
+    {formatted_news}
 
-    ROLE: You are an AI news analyst writing in Greek for a beauty industry educator.
+    ## YOUR TASK - STAGE 1: NEWS SELECTION
 
-    TASK: Select ONLY 5 most important AI news from the last 48 hours covering: {topics}
+    You are an AI industry analyst. From the {total_items} news items above,
+    select ONLY 5-6 of the most important items.
 
-    STRICT LIMITS:
-    - Maximum 5 news items. Not 6. Not 7. Exactly 5 or fewer.
-    - Each summary: maximum 2 short sentences in Greek.
-    - Total response under 800 words.
+    SELECTION CRITERIA:
+    - Major product launches or model releases
+    - Practical AI tools that professionals can use
+    - Significant industry shifts
+    - Prefer items relevant to content creation, education, and beauty/aesthetics
 
-    FORMAT (write everything in Greek):
+    OUTPUT FORMAT:
+    Return ONLY a JSON array of selected news IDs. No explanations.
+
+    Example: ["INT-1", "INT-5", "INT-12"]
+
+    CRITICAL: Select EXACTLY 5-6 items. Not more.
+
+  stage2_prompt_template: |
+    Δημιούργησε μια ΣΥΝΤΟΜΗ ενημέρωση AI νέων στα Ελληνικά για τα {count} επιλεγμένα νέα παρακάτω.
+
+    {selected_news}
+
+    ΑΥΣΤΗΡΟΙ ΚΑΝΟΝΕΣ:
+    - Όλο το κείμενο ΑΠΟΚΛΕΙΣΤΙΚΑ στα Ελληνικά (μετάφρασε ό,τι είναι στα Αγγλικά)
+    - Κάθε νέο: ΜΟΝΟ 2 προτάσεις περίληψη
+    - Συνολικό κείμενο κάτω από 700 λέξεις
+    - Χωρίς κατηγοριοποιήσεις, χωρίς headers με αριθμούς όπως "1. **Large Language Models**"
+
+    ΔΟΜΗ:
 
     📅 ΣΥΝΟΨΗ ΗΜΕΡΑΣ
-    [2 σύντομες προτάσεις στα Ελληνικά για τις σημαντικότερες τάσεις]
+    [2 σύντομες προτάσεις στα Ελληνικά για τις βασικές τάσεις]
 
     📰 ΤΑ ΝΕΑ
 
-    1. [Τίτλος στα Ελληνικά]
-    [Μία περίληψη 2 προτάσεων στα Ελληνικά]
-    💡 Σημασία: [Μία πρόταση στα Ελληνικά - γιατί ενδιαφέρει επαγγελματία αισθητικής/εκπαίδευσης]
+    1. [Σύντομος τίτλος στα Ελληνικά]
+    [2 προτάσεις περίληψη στα Ελληνικά]
+    💡 Γιατί έχει σημασία: [1 πρόταση στα Ελληνικά για επαγγελματία αισθητικής/εκπαίδευσης]
+    🔗 Πηγή: [όνομα πηγής με link]
 
-    [Repeat for items 2-5]
+    [Επανάλαβε για items 2-6]
 
     🔮 ΤΙ ΝΑ ΠΡΟΣΕΞΩ
-    • [Σύντομο bullet στα Ελληνικά]
-    • [Σύντομο bullet στα Ελληνικά]
+    • [σύντομο bullet στα Ελληνικά]
+    • [σύντομο bullet στα Ελληνικά]
 
-    REMEMBER: EVERYTHING in Greek. Be concise. Maximum 5 items.
+    ΤΕΛΙΚΗ ΥΠΕΝΘΥΜΙΣΗ: Όλα στα Ελληνικά. Σύντομα. Max 5-6 νέα.
 
 logging:
   level: INFO
