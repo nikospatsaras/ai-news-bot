@@ -148,7 +148,7 @@ class EmailNotifier:
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
                 body {{
-                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+                    font-family: Verdana, Tahoma, 'Segoe UI', Geneva, sans-serif;
                     line-height: 1.8;
                     color: #24292e;
                     max-width: 800px;
