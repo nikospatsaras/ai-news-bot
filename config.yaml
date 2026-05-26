@@ -1,6 +1,6 @@
 llm:
   provider: gemini
-  model: gemini-2.5-flash-lite
+  model: gemini-2.5-flash
 
 news:
   use_real_sources: true
@@ -8,62 +8,77 @@ news:
   max_items_per_source: 3
 
   topics:
-    - "AI tools for content creation"
-    - "New AI model releases"
-    - "AI for beauty and aesthetics industry"
-    - "Practical AI tools for professionals"
+    - "AI tools and platforms for content creation in beauty and aesthetics"
+    - "AI applications in skin analysis, virtual try-on, and aesthetic treatments"
+    - "AI for professional education and certification platforms"
+    - "Major AI model and product launches with practical business applications"
+    - "Industry trends affecting small businesses and independent professionals"
+    - "AI-powered marketing and client engagement tools"
 
   stage1_prompt_template: |
     {formatted_news}
 
-    ## YOUR TASK - STAGE 1: NEWS SELECTION
+    ## STAGE 1: STRATEGIC NEWS CURATION
 
-    You are an AI industry analyst. From the {total_items} news items above,
-    select ONLY 5-6 of the most important items.
+    You are a senior industry analyst curating news for a professional in the
+    beauty/aesthetics education sector who needs strategic, actionable intelligence.
 
-    SELECTION CRITERIA:
-    - Major product launches or model releases
-    - Practical AI tools that professionals can use
-    - Significant industry shifts
-    - Prefer items relevant to content creation, education, and beauty/aesthetics
+    From the {total_items} items above, select EXACTLY 5-6 of the most
+    strategically valuable items.
 
-    OUTPUT FORMAT:
-    Return ONLY a JSON array of selected news IDs. No explanations.
+    PRIORITY (in order):
+    1. AI tools with direct application in beauty/aesthetics/skincare
+    2. AI for content creation and professional education platforms
+    3. Major model releases with practical business implications
+    4. Industry shifts affecting small/medium businesses
+    5. Tools professionals can immediately adopt
 
+    EXCLUDE:
+    - Pure academic research without practical applications
+    - Generic AI hype without concrete deliverables
+    - Internal corporate news without market impact
+
+    OUTPUT: Return ONLY a JSON array of selected news IDs.
     Example: ["INT-1", "INT-5", "INT-12"]
 
-    CRITICAL: Select EXACTLY 5-6 items. Not more.
+    CRITICAL: EXACTLY 5-6 items.
 
   stage2_prompt_template: |
-    Δημιούργησε μια ΣΥΝΤΟΜΗ ενημέρωση AI νέων στα Ελληνικά για τα {count} επιλεγμένα νέα παρακάτω.
+    Δημιούργησε ένα επαγγελματικό briefing AI νέων στα Ελληνικά για στέλεχος
+    του χώρου της αισθητικής εκπαίδευσης.
 
     {selected_news}
 
+    ΥΦΟΣ:
+    - Επαγγελματικό, αναλυτικό — σαν εκτελεστικό briefing
+    - Συγκεκριμένο, με ουσία — όχι γενικότητες ή AI buzzwords
+    - Με έμφαση σε πρακτικές επιπτώσεις και επιχειρηματικές ευκαιρίες
+
     ΑΥΣΤΗΡΟΙ ΚΑΝΟΝΕΣ:
-    - Όλο το κείμενο ΑΠΟΚΛΕΙΣΤΙΚΑ στα Ελληνικά (μετάφρασε ό,τι είναι στα Αγγλικά)
-    - Κάθε νέο: ΜΟΝΟ 2 προτάσεις περίληψη
-    - Συνολικό κείμενο κάτω από 700 λέξεις
-    - Χωρίς κατηγοριοποιήσεις, χωρίς headers με αριθμούς όπως "1. **Large Language Models**"
+    - Ολόκληρο το κείμενο στα Ελληνικά (μετάφρασε ό,τι είναι στα Αγγλικά)
+    - Κάθε νέο: 2-3 ουσιαστικές προτάσεις ανάλυσης (όχι απλή περιγραφή)
+    - Συνολικό μέγεθος κάτω από 800 λέξεις
+    - Απόφυγε generic phrases ("επαναστατικό", "θα αλλάξει τα πάντα", "game-changer")
 
     ΔΟΜΗ:
 
-    📅 ΣΥΝΟΨΗ ΗΜΕΡΑΣ
-    [2 σύντομες προτάσεις στα Ελληνικά για τις βασικές τάσεις]
+    📊 EXECUTIVE SUMMARY
+    [2-3 προτάσεις: οι 2-3 πιο σημαντικές εξελίξεις της ημέρας και τι σημαίνουν στρατηγικά]
 
-    📰 ΤΑ ΝΕΑ
+    📰 ΑΝΑΛΥΤΙΚΗ ΕΝΗΜΕΡΩΣΗ
 
-    1. [Σύντομος τίτλος στα Ελληνικά]
-    [2 προτάσεις περίληψη στα Ελληνικά]
-    💡 Γιατί έχει σημασία: [1 πρόταση στα Ελληνικά για επαγγελματία αισθητικής/εκπαίδευσης]
-    🔗 Πηγή: [όνομα πηγής με link]
+    1. [Ξεκάθαρος, σύντομος τίτλος στα Ελληνικά]
+    [2-3 προτάσεις: τι συμβαίνει + τεχνικό/επιχειρηματικό πλαίσιο]
+    💼 Επιχειρηματική σημασία: [1 πρόταση - πώς επηρεάζει επαγγελματίες στον χώρο σου]
 
     [Επανάλαβε για items 2-6]
 
-    🔮 ΤΙ ΝΑ ΠΡΟΣΕΞΩ
-    • [σύντομο bullet στα Ελληνικά]
-    • [σύντομο bullet στα Ελληνικά]
+    🎯 ΣΤΡΑΤΗΓΙΚΕΣ ΠΑΡΑΤΗΡΗΣΕΙΣ
+    • [Trend ή pattern που αξίζει παρακολούθηση]
+    • [Επιχειρηματική ευκαιρία ή κίνδυνος]
+    • [Προαιρετική τρίτη παρατήρηση]
 
-    ΤΕΛΙΚΗ ΥΠΕΝΘΥΜΙΣΗ: Όλα στα Ελληνικά. Σύντομα. Max 5-6 νέα.
+    ΤΕΛΙΚΗ ΟΔΗΓΙΑ: Όλα στα Ελληνικά. Επαγγελματικός τόνος. Συγκεκριμένα δεδομένα.
 
 logging:
   level: INFO
