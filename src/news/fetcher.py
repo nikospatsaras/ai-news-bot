@@ -26,13 +26,9 @@ class NewsFetcher:
             "Wired AI": "https://www.wired.com/feed/tag/ai/latest/rss",
             "The Next Web": "https://thenextweb.com/feed",
             "The Verge AI": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
-            "Engadget AI": "https://www.engadget.com/tag/ai/rss.xml",
 
             # Official AI Company Blogs
-            "OpenAI Blog": "https://openai.com/blog/rss/",
             "Google AI Blog": "https://blog.google/technology/ai/rss/",
-            "DeepMind Blog": "https://deepmind.google/blog/rss.xml",
-            "Meta AI Blog": "https://ai.meta.com/blog/rss/",
             "Microsoft AI Blog": "https://blogs.microsoft.com/ai/feed/",
 
             # Research & Academic
@@ -42,7 +38,6 @@ class NewsFetcher:
             "arXiv NLP": "https://rss.arxiv.org/rss/cs.CL",
 
             # Industry Verticals
-            "Healthcare IT News AI": "https://www.healthcareitnews.com/taxonomy/term/31/feed",
             "Robotics Business Review": "https://www.roboticsbusinessreview.com/feed/",
             "Autonomous Vehicle News": "https://www.autonomousvehicleinternational.com/feed",
         }
