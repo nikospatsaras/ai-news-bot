@@ -1,6 +1,6 @@
 llm:
   provider: gemini
-  model: gemini-2.0-flash-exp
+  model: gemini-1.5-flash
 
 news:
   use_real_sources: true
