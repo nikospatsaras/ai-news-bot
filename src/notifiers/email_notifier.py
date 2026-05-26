@@ -65,7 +65,7 @@ class EmailNotifier:
         if subject is None:
             today = datetime.now().strftime("%d/%m/%Y")
             lang_suffix = f" [{language.upper()}]" if language != "en" else ""
-            subject = f"AI News Digest - {today}{lang_suffix}"
+            subject = f"Καθημερινό AI Briefing — {today}"
 
         if not all([self.gmail_address, self.gmail_app_password, self.email_to]):
             logger.error("Gmail notifier is not fully configured. Skipping email send.")
