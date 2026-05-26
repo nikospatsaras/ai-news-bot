@@ -96,12 +96,12 @@ class EmailNotifier:
 
         current_year = datetime.now().year
 
-        # Social media icons from Simple Icons CDN (white versions)
+        # Social media icons
         icon_style = 'width="20" height="20" style="vertical-align: middle; border: 0; display: inline-block;"'
         facebook_icon = f'<img src="https://cdn.simpleicons.org/facebook/ffffff" alt="Facebook" {icon_style}>'
         instagram_icon = f'<img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram" {icon_style}>'
-        linkedin_icon = '<img src="https://api.iconify.design/ic:baseline-linkedin.svg?color=%23ffffff" alt="LinkedIn" width="24" height="24" style="vertical-align: middle; border: 0; display: inline-block;">'
         viber_icon = f'<img src="https://cdn.simpleicons.org/viber/ffffff" alt="Viber" {icon_style}>'
+        linkedin_icon = '<img src="https://api.iconify.design/mdi:linkedin.svg?color=%23ffffff" alt="LinkedIn" width="24" height="24" style="vertical-align: middle; border: 0; display: inline-block;">'
 
         html = f"""
         <!DOCTYPE html>
@@ -166,12 +166,28 @@ class EmailNotifier:
                 .content ul, .content ol {{ margin: 15px 0; padding-left: 30px; }}
                 .content li {{ margin: 10px 0; line-height: 1.8; }}
                 .content strong {{ font-weight: 700; color: #476fff; }}
+
+                /* --- NEW: TAG BADGES --- */
+                /* Στυλιζάρει το πρώτο bold element κάθε παραγράφου σαν badge */
+                .content p > strong:first-child {{
+                    display: inline-block;
+                    background-color: #476fff;
+                    color: #ffffff !important;
+                    padding: 3px 10px;
+                    border-radius: 12px;
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 0.5px;
+                    margin-right: 8px;
+                    text-transform: uppercase;
+                }}
+
                 .content em {{ font-style: italic; color: #586069; }}
                 .content hr {{ border: none; border-top: 2px solid #e1e4e8; margin: 30px 0; }}
                 .content a {{ color: #476fff; text-decoration: none; }}
                 .content a:hover {{ text-decoration: underline; }}
 
-                /* --- MODERN FOOTER WITH HOSTED ICONS --- */
+                /* --- MODERN FOOTER --- */
                 .footer {{
                     margin-top: 50px;
                     padding: 40px 20px 30px 20px;
@@ -234,7 +250,7 @@ class EmailNotifier:
                     <div class="social-icons">
                         <a href="https://www.facebook.com/nikoslaospatsaras/" class="social-icon" title="Facebook">{facebook_icon}</a>
                         <a href="https://www.instagram.com/nikospatsaras/" class="social-icon" title="Instagram">{instagram_icon}</a>
-                        <a href="https://www.linkedin.com/in/nikolaos-patsaras/" class="social-icon" title="LinkedIn"><img src="https://api.iconify.design/mdi:linkedin.svg?color=%23ffffff" alt="LinkedIn" width="24" height="24" style="vertical-align: middle; border: 0; display: inline-block;"></a>
+                        <a href="https://www.linkedin.com/in/nikolaos-patsaras/" class="social-icon" title="LinkedIn">{linkedin_icon}</a>
                         <a href="https://invite.viber.com/?g2=AQAuZ8nuvPdi11XROm9N2PgkZkVBGi%2BV6LPRSYKJC%2BpR%2BhiReinEPvDP8zLI5oC%2B" class="social-icon" title="Viber Community">{viber_icon}</a>
                     </div>
 
