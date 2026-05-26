@@ -22,22 +22,10 @@ class EmailNotifier:
         gmail_app_password: Optional[str] = None,
         email_to: Optional[str] = None,
     ):
-        """
-        Initialize EmailNotifier with Gmail SMTP.
-
-        Args:
-            gmail_address: Your Gmail address
-            gmail_app_password: App Password from Google Account settings
-              (NOT your regular Gmail password - see README for setup instructions)
-            email_to: Recipient email address
-
-        All parameters default to environment variables if not provided.
-        """
         self.gmail_address = gmail_address or os.getenv("GMAIL_ADDRESS")
         self.gmail_app_password = gmail_app_password or os.getenv("GMAIL_APP_PASSWORD")
         self.email_to = email_to or os.getenv("EMAIL_TO")
 
-        # Gmail SMTP settings
         self.smtp_server = "smtp.gmail.com"
         self.smtp_port = 587
 
@@ -50,10 +38,6 @@ class EmailNotifier:
             logger.info(f"EmailNotifier initialized with Gmail SMTP (from: {self.gmail_address})")
 
     def send(self, content: str, subject: Optional[str] = None, language: str = "en") -> bool:
-        """
-        Send email notification with news digest.
-        """
-        # Create default subject if not provided
         if subject is None:
             today = datetime.now().strftime("%d/%m/%Y")
             subject = f"Καθημερινό AI Briefing — {today}"
@@ -63,16 +47,13 @@ class EmailNotifier:
             return False
 
         try:
-            # Create HTML email content
             html_content = self._create_html_email(content, subject)
 
-            # Create message
             msg = MIMEMultipart("alternative")
             msg["Subject"] = subject
             msg["From"] = self.gmail_address
             msg["To"] = self.email_to
 
-            # Attach plain text and HTML versions
             part1 = MIMEText(content, "plain", "utf-8")
             part2 = MIMEText(html_content, "html", "utf-8")
             msg.attach(part1)
@@ -80,7 +61,6 @@ class EmailNotifier:
 
             logger.info(f"Sending email via Gmail SMTP to {self.email_to}")
 
-            # Connect and send (supports multiple recipients via comma-separated EMAIL_TO)
             with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
                 server.starttls()
                 server.login(self.gmail_address, self.gmail_app_password)
@@ -93,8 +73,7 @@ class EmailNotifier:
         except smtplib.SMTPAuthenticationError as e:
             logger.error(
                 f"Gmail authentication failed: {str(e)}. "
-                "Make sure you're using an App Password, not your regular Gmail password. "
-                "See README for setup instructions."
+                "Make sure you're using an App Password, not your regular Gmail password."
             )
             return False
         except Exception as e:
@@ -102,26 +81,20 @@ class EmailNotifier:
             return False
 
     def _create_html_email(self, content: str, subject: str) -> str:
-        """
-        Create HTML version of email with proper formatting.
-        """
         try:
             import markdown
             from markdown.extensions import nl2br, tables, fenced_code
 
             html_content = markdown.markdown(
                 content,
-                extensions=[
-                    'nl2br',
-                    'tables',
-                    'fenced_code',
-                    'sane_lists',
-                ]
+                extensions=['nl2br', 'tables', 'fenced_code', 'sane_lists']
             )
         except ImportError:
             logger.warning("markdown library not installed, using basic HTML formatting")
             import html
             html_content = html.escape(content).replace('\n', '<br>\n')
+
+        current_year = datetime.now().year
 
         html = f"""
         <!DOCTYPE html>
@@ -212,33 +185,6 @@ class EmailNotifier:
                     font-style: italic;
                     color: #586069;
                 }}
-                .content code {{
-                    background-color: #f6f8fa;
-                    padding: 3px 6px;
-                    border-radius: 3px;
-                    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-                    font-size: 0.9em;
-                    color: #d73a49;
-                }}
-                .content pre {{
-                    background-color: #f6f8fa;
-                    padding: 16px;
-                    border-radius: 6px;
-                    overflow-x: auto;
-                    border: 1px solid #e1e4e8;
-                }}
-                .content pre code {{
-                    background-color: transparent;
-                    padding: 0;
-                    color: #24292e;
-                }}
-                .content blockquote {{
-                    margin: 20px 0;
-                    padding: 10px 20px;
-                    border-left: 4px solid #dfe2e5;
-                    background-color: #f6f8fa;
-                    color: #586069;
-                }}
                 .content hr {{
                     border: none;
                     border-top: 2px solid #e1e4e8;
@@ -248,35 +194,72 @@ class EmailNotifier:
                     color: #476fff;
                     text-decoration: none;
                     border-bottom: 1px solid transparent;
-                    transition: border-bottom 0.2s;
                 }}
                 .content a:hover {{
                     border-bottom: 1px solid #476fff;
                 }}
-                .content table {{
-                    border-collapse: collapse;
-                    width: 100%;
-                    margin: 20px 0;
-                }}
-                .content th, .content td {{
-                    border: 1px solid #e1e4e8;
-                    padding: 10px 15px;
-                    text-align: left;
-                }}
-                .content th {{
-                    background-color: #f6f8fa;
-                    font-weight: 600;
-                }}
+
+                /* --- MODERN FOOTER --- */
                 .footer {{
                     margin-top: 50px;
-                    padding-top: 25px;
-                    border-top: 2px solid #e1e4e8;
+                    padding: 40px 20px 30px 20px;
+                    border-top: 1px solid #e1e4e8;
                     text-align: center;
-                    font-size: 14px;
-                    color: #586069;
+                    background-color: #fafbfc;
+                    border-radius: 0 0 8px 8px;
                 }}
-                .footer p {{
-                    margin: 8px 0;
+                .social-icons {{
+                    margin-bottom: 25px;
+                }}
+                .social-icon {{
+                    display: inline-block;
+                    width: 42px;
+                    height: 42px;
+                    line-height: 42px;
+                    text-align: center;
+                    border-radius: 50%;
+                    background-color: #476fff;
+                    color: #ffffff !important;
+                    font-weight: 700;
+                    font-size: 16px;
+                    text-decoration: none;
+                    margin: 0 5px;
+                    font-family: Helvetica, Arial, sans-serif;
+                }}
+                .social-icon:hover {{
+                    background-color: #2c4dc7;
+                }}
+                .brand-name {{
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #24292e;
+                    margin: 20px 0 8px 0;
+                }}
+                .tagline {{
+                    color: #586069;
+                    font-size: 14px;
+                    margin: 0 0 25px 0;
+                    font-style: italic;
+                }}
+                .quick-links {{
+                    margin: 15px 0;
+                    font-size: 14px;
+                }}
+                .quick-links a {{
+                    color: #476fff;
+                    text-decoration: none;
+                    font-weight: 600;
+                    margin: 0 8px;
+                }}
+                .quick-links a:hover {{
+                    text-decoration: underline;
+                }}
+                .copyright {{
+                    color: #999;
+                    font-size: 12px;
+                    margin-top: 25px;
+                    padding-top: 15px;
+                    border-top: 1px solid #e1e4e8;
                 }}
             </style>
         </head>
@@ -286,9 +269,27 @@ class EmailNotifier:
                 <div class="content">
                     {html_content}
                 </div>
-            </div>
-            <div class="footer">
-                <p>Καθημερινή ενημέρωση AI — Personal briefing</p>
+
+                <!-- Modern Footer -->
+                <div class="footer">
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/nikoslaospatsaras/" class="social-icon" title="Facebook">f</a>
+                        <a href="https://www.instagram.com/nikospatsaras/" class="social-icon" title="Instagram">IG</a>
+                        <a href="https://www.linkedin.com/in/nikolaos-patsaras/" class="social-icon" title="LinkedIn">in</a>
+                        <a href="https://invite.viber.com/?g2=AQAuZ8nuvPdi11XROm9N2PgkZkVBGi%2BV6LPRSYKJC%2BpR%2BhiReinEPvDP8zLI5oC%2B" class="social-icon" title="Viber Community">V</a>
+                    </div>
+
+                    <p class="brand-name">Νίκος Πατσαράς</p>
+                    <p class="tagline">AI Briefing — Καθημερινή ενημέρωση για επαγγελματίες της αισθητικής</p>
+
+                    <div class="quick-links">
+                        <a href="https://nikospatsaras.gr">Website</a>
+                        <span style="color:#ccc;">|</span>
+                        <a href="https://invite.viber.com/?g2=AQAuZ8nuvPdi11XROm9N2PgkZkVBGi%2BV6LPRSYKJC%2BpR%2BhiReinEPvDP8zLI5oC%2B">Viber Community</a>
+                    </div>
+
+                    <p class="copyright">© {current_year} Νίκος Πατσαράς · All rights reserved<br>nikospatsaras.gr</p>
+                </div>
             </div>
         </body>
         </html>
